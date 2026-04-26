@@ -1,13 +1,23 @@
 const express = require('express');
 const cors = require('cors');
+const mongoose = require('mongoose'); // Mongoose එකතු කළා
 require('dotenv').config();
 
 const app = express();
+
+// Middleware
 app.use(cors());
 app.use(express.json());
 
+// Database Connection
+const uri = process.env.MONGO_URI;
+mongoose.connect(uri)
+    .then(() => console.log("LernioDB Connected! ✅"))
+    .catch(err => console.log("Database connection error: ❌", err));
+
+// Basic Route
 app.get('/', (req, res) => {
-    res.send('Lernio.lk Backend is Running! 🚀');
+    res.send('Lernio.lk Backend is Running with Database! 🚀');
 });
 
 const PORT = process.env.PORT || 5000;
