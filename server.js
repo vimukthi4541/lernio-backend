@@ -9,6 +9,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+const authRoute = require('./routes/auth');
+app.use('/api/auth', authRoute);
+
 // Database Connection
 const uri = process.env.MONGO_URI;
 mongoose.connect(uri)
